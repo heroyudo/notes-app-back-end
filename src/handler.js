@@ -12,11 +12,11 @@ const addNoteHandler = (request, h) => {
     const newNote = {
         title, tags, body, id, createdAt, updatedAt,
       };
-      notes.push(newNote);
-      const isSuccess = notes.filter((note) => note.id === id).length > 0;
+    notes.push(newNote);
+    const isSuccess = notes.filter((note) => note.id === id).length > 0;
 
-      if (isSuccess) {
-        const response = h.response({
+    if (isSuccess) {
+      const response = h.response({
           status: 'success',
           message: 'Catatan berhasil ditambahkan',
           data: {
@@ -27,12 +27,12 @@ const addNoteHandler = (request, h) => {
         return response;
       }
 
-      const response = h.response({
-        status: 'fail',
-        message: 'Catatan gagal ditambahkan',
-      });
-      response.code(500);
-      return response;
+    const response = h.response({
+      status: 'fail',
+      message: 'Catatan gagal ditambahkan',
+    });
+    response.code(500);
+    return response;
 };
 
 
@@ -44,10 +44,9 @@ const getAllNotesHandler = () => ({
   },
 });
 
+
 const getNoteByIdHandler = (request, h) => {
-  const getNoteByIdHandler = (request, h) => {
-    const { id } = request.params;
-  };
+  const { id } = request.params;
   const note = notes.filter((n) => n.id === id)[0];
  
  if (note !== undefined) {
@@ -59,12 +58,12 @@ const getNoteByIdHandler = (request, h) => {
     };
   }
  
-    const response = h.response({
-      status: 'fail',
-      message: 'Catatan tidak ditemukan',
-    });
-    response.code(404);
-    return response;
+  const response = h.response({
+    status: 'fail',
+    message: 'Catatan tidak ditemukan',
+  });
+  response.code(404);
+  return response;
 };
 
 
@@ -102,7 +101,6 @@ const editNoteByIdHandler = (request, h) => {
 //=================================================================
 const deleteNoteByIdHandler = (request, h) => {
   const { id } = request.params;
- 
   const index = notes.findIndex((note) => note.id === id);
  
   if (index !== -1) {
